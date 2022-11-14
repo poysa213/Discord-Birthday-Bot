@@ -1,1 +1,1 @@
-# -Discord-Birthday-Bot
+# Discord-Birthday-Bot
