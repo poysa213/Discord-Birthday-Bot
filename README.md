@@ -1,17 +1,17 @@
 # Discord-Birthday-Bot
 <h2> Allowed commands </h2>
-<h6>
+<p>
 /TodayBirthday returns all the people's names who have their birthday today. <br>
 /NextBirthday returns the first birthday starting from tomorrow. <br>
 /BirthdaysIn {date} returns the names of all the people who have their birthday in the specified date. <br>
 /WhenIsMyBirthday {name} returns the birthday of a specific person. <br>
- </h6>
+ </p>
 
 <h3> Provided Assets: </h3>
 <h5> db.json </h5>
 Here is an example of the db.json file:
   <br>
-{
+{<br>
 "0": {
 "name": "Kathleen Stigall",
 "bday": "08/30/2001"
