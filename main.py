@@ -81,15 +81,7 @@ def first_birthday(date):
 
 @client.event
 async def on_ready():
-    welcome = """
-    I could listen for the following commands:
-        /TodayBirthday             : returns the names of people who have their birthday today.
-        /NextBirthday              : returns the first birthday starting from tomorrow.
-        /BirthdaysIn {{date}}      : returns the names of people who have their birthday on the specified date.
-        /WhenIsMyBirthday {{name}} : returns the birthday of a specific person.
-    """
-    channel = client.get_channel(CHANNEL_ID)  
-    await channel.send(welcome)
+    print("Bot started")
 
     await check_birthdays()
 
@@ -109,7 +101,7 @@ async def schedule_announcement():
             response = f"Today is {' and '.join(today_bday)}'s birthday!"
         else:
             response = 'There is no person celebrating their birthday today.'
-        channel = client.get_channel(CHANNEL_ID)  # Replace YOUR_CHANNEL_ID with the actual channel ID
+        channel = client.get_channel(CHANNEL_ID)    
         await channel.send(response)
 
 
@@ -117,8 +109,17 @@ async def schedule_announcement():
 async def on_message(message):
     if message.author == client.user:
         return
+    if message.content.startswith('/BDB-help'):
+        response = """
+    I could listen for the following commands:
+        /TodayBirthday                  : returns the names of people who have their birthday today.
+        /NextBirthday                   : returns the first birthday starting from tomorrow.
+        /BirthdaysIn {{date}}           : returns the names of people who have their birthday on the specified date.
+        /WhenIsMyBirthday {{name}}      : returns the birthday of a specific person.
+    """
+        await message.channel.send(response)
 
-    if message.content.startswith('/TodayBirthday'):
+    elif message.content.startswith('/TodayBirthday'):
         today_date = datetime.date(datetime.now()).strftime("%d/%m/%Y")
         today_bday = birthdays_in(today_date)
         if today_bday:
@@ -148,7 +149,7 @@ async def on_message(message):
         await message.channel.send(response)
 
     else:
-        await message.channel.send("Please Enter a valid command!")
+        return
 
 
 client.run(DISCORD_TOKEN)
